@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Buddy!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #ff8e8e;
+            --accent-color: #ffb8b8;
+            --dark-color: #333;
+            --light-color: #fff;
+            --text-color: #444;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--light-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .confetti {
+            width: 15px;
+            height: 15px;
+            background-color: var(--primary-color);
+            position: absolute;
+            left: 50%;
+            animation: confetti 5s ease-in-out -2s infinite;
+        }
+
+        .confetti:nth-child(1) {
+            background-color: #ff6b6b; left: 10%; animation-delay: 0;
+        }
+        .confetti:nth-child(2) {
+            background-color: #ffb8b8; left: 20%; animation-delay: -0.5s;
+        }
+        .confetti:nth-child(3) {
+            background-color: #ff8e8e; left: 30%; animation-delay: -1s;
+        }
+        .confetti:nth-child(4) {
+            background-color: #ff6b6b; left: 40%; animation-delay: -1.5s;
+        }
+        .confetti:nth-child(5) {
+            background-color: #ffb8b8; left: 50%; animation-delay: -2s;
+        }
+        .confetti:nth-child(6) {
+            background-color: #ff8e8e; left: 60%; animation-delay: -2.5s;
+        }
+        .confetti:nth-child(7) {
+            background-color: #ff6b6b; left: 70%; animation-delay: -3s;
+        }
+        .confetti:nth-child(8) {
+            background-color: #ffb8b8; left: 80%; animation-delay: -3.5s;
+        }
+        .confetti:nth-child(9) {
+            background-color: #ff8e8e; left: 90%; animation-delay: -4s;
+        }
+        .confetti:nth-child(10) {
+            background-color: #ff6b6b; left: 100%; animation-delay: -4.5s;
+        }
+
+        @keyframes confetti {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        /* Header */
+        header {
+            background-color: var(--light-color);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        nav ul {
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            padding: 0.5rem 1rem;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        nav ul li a.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 80px;
+            min-height: calc(100vh - 120px);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4rem 8%;
+            background: linear-gradient(135deg, #fff5f5 0%, #fff 100%);
+        }
+
+        .hero-content {
+            flex: 1;
+            padding-right: 2rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .animated-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .name-highlight {
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .name-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background-color: rgba(255, 107, 107, 0.3);
+            z-index: -1;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .main-image {
+            max-width: 100%;
+            height: auto;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .balloon1 {
+            background-color: #ff6b6b;
+            top: -30px;
+            left: 20%;
+            animation-delay: 0s;
+        }
+
+        .balloon2 {
+            background-color: #6b6bff;
+            top: 10px;
+            right: 15%;
+            animation-delay: 1s;
+            width: 40px;
+            height: 60px;
+        }
+
+        .balloon3 {
+            background-color: #6bff6b;
+            bottom: 30px;
+            left: 30%;
+            animation-delay: 2s;
+            width: 35px;
+            height: 55px;
+        }
+
+        .floating-balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 30px;
+            background-color: #ccc;
+        }
+
+        /* Countdown Section */
+        .countdown-section {
+            padding: 4rem 8%;
+            text-align: center;
+            background-color: var(--light-color);
+        }
+
+        .countdown-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .countdown-box {
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            padding: 1.5rem 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            min-width: 120px;
+            transition: transform 0.3s ease;
+        }
+
+        .countdown-box:hover {
+            transform: translateY(-10px);
+        }
+
+        .countdown-box span {
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .countdown-box p {
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Quick Message Section */
+        .quick-message {
+            padding: 4rem 8%;
+            background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+            text-align: center;
+        }
+
+        .quick-message h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        .message-box {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--light-color);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: left;
+            position: relative;
+        }
+
+        .message-box::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 20px;
+            font-size: 100px;
+            color: rgba(255, 107, 107, 0.2);
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .message-box p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Gallery Page */
+        .gallery-intro {
+            padding: 4rem 8% 2rem;
+            text-align: center;
+        }
+
+        .gallery-intro h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .gallery-intro p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .photo-gallery {
+            padding: 2rem 8% 4rem;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .gallery-item img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .caption {
+            transform: translateY(0);
+        }
+
+        .memory-quote {
+            padding: 4rem 8%;
+            text-align: center;
+            background-color: var(--light-color);
+        }
+
+        blockquote {
+            font-size: 1.5rem;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            color: var(--primary-color);
+        }
+
+        blockquote::before, blockquote::after {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(255, 107, 107, 0.2);
+            position: absolute;
+        }
+
+        blockquote::before {
+            top: 0;
+            left: 0;
+        }
+
+        blockquote::after {
+            bottom: -40px;
+            right: 0;
+        }
+
+        blockquote footer {
+            font-size: 1rem;
+            margin-top: 1rem;
+            font-style: normal;
+            color: var(--text-color);
+        }
+
+        /* Wishes Page */
+        .wishes-intro {
+            padding: 4rem 8% 2rem;
+            text-align: center;
+        }
+
+        .wishes-intro h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .wishes-intro p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .wishes-container {
+            padding: 2rem 8% 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Surprise Page */
+        .surprise-intro {
+            padding: 4rem 8% 2rem;
+            text-align: center;
+        }
+
+        .surprise-intro h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .surprise-intro p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .surprise-container {
+            padding: 4rem 8%;
+            text-align: center;
+        }
+
+        .surprise-lock {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .surprise-lock:hover {
+            transform: scale(1.05);
+        }
+
+        .lock-icon {
+            font-size: 5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .surprise-content {
+            max-width: 1000px;
+            margin: 3rem auto 0;
+            padding: 2rem;
+            background-color: var(--light-color);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .surprise-content h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .surprise-details {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            text-align: left;
+        }
+
+        .surprise-details img {
+            flex: 1;
+            border-radius: 10px;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .details-text {
+            flex: 1;
+        }
+
+        .details-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .details-text ul {
+            margin: 2rem 0;
+        }
+
+        .details-text li {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .details-text i {
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content p {
+            margin-bottom: 1rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-icons a {
+            color: var(--light-color);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Buttons */
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 4rem 5%;
+            }
+
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+
+            .countdown-container {
+                flex-wrap: wrap;
+            }
+
+            .countdown-box {
+                min-width: 100px;
+            }
+
+            .surprise-details {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .animated-text {
+                font-size: 2.5rem;
+            }
+
+            .countdown-box {
+                padding: 1rem 1.5rem;
+                min-width: 80px;
+            }
+
+            .countdown-box span {
+                font-size: 2rem;
+            }
+
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            .message-box {
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            nav ul {
+                flex-wrap: wrap;
+            }
+
+            nav ul li {
+                margin: 0.5rem;
+            }
+
+            .animated-text {
+                font-size: 2rem;
+            }
+
+            .countdown-box {
+                min-width: 60px;
+                padding: 0.8rem 1rem;
+            }
+
+            .countdown-box span {
+                font-size: 1.5rem;
+            }
+
+            .countdown-box p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+        <div class="confetti"></div>
+    </div>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" data-page="home" class="active">Home</a></li>
+                <li><a href="#" data-page="memories">Our Memories</a></li>
+                <li><a href="#" data-page="wishes">Birthday Wishes</a></li>
+                <li><a href="#" data-page="surprise">Special Surprise</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Page -->
+    <main id="home" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="animated-text">Happy Birthday, <span class="name-highlight">Buddy!</span>!</h1>
+                <p class="subtitle">Celebrating you - the most amazing friend in the world!</p>
+                <button id="playMusic" class="cta-button">Play Birthday Song</button>
+                <audio id="birthdaySong" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+            </div>
+            <div class="hero-image">
+                <div class="floating-balloon balloon1"></div>
+                <div class="floating-balloon balloon2"></div>
+                <div class="floating-balloon balloon3"></div>
+                <img src="https://i.imgur.com/J9WcvnL.png" alt="Birthday Illustration" class="main-image">
+            </div>
+        </section>
+
+        <section class="countdown-section">
+            <h2>The Celebration Begins In...</h2>
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <span id="days">00</span>
+                    <p>Days</p>
+                </div>
+                <div class="countdown-box">
+                    <span id="hours">00</span>
+                    <p>Hours</p>
+                </div>
+                <div class="countdown-box">
+                    <span id="minutes">00</span>
+                    <p>Minutes</p>
+                </div>
+                <div class="countdown-box">
+                    <span id="seconds">00</span>
+                    <p>Seconds</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="quick-message">
+            <h2>A Quick Message For You</h2>
+            <div class="message-box">
+                <p>Dear [Friend's Name],</p>
+                <p>On this special day, I want you to know how much you mean to me. You're not just my best friend - you're family. Your kindness, laughter, and support make every day brighter.</p>
+                <p>May this year bring you endless joy, success in all your endeavors, and dreams that come true. You deserve the world!</p>
+                <p>With all my love,</p>
+                <p>[Your Name]</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Memories Page -->
+    <main id="memories" class="page">
+        <section class="gallery-intro">
+            <h1>Our Beautiful Memories</h1>
+            <p>Every moment with you becomes a cherished memory. Here's a collection of our best times together.</p>
+        </section>
+
+        <section class="photo-gallery">
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/1.jpg" alt="Memory 1">
+                    <div class="caption">Our first meetup - 2018</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/2.jpg" alt="Memory 2">
+                    <div class="caption">Beach vacation - 2019</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/3.jpg" alt="Memory 3">
+                    <div class="caption">Christmas celebration - 2020</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/4.jpg" alt="Memory 4">
+                    <div class="caption">Road trip adventures - 2021</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/5.jpg" alt="Memory 5">
+                    <div class="caption">Your graduation day - 2022</div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://i.imgur.com/6.jpg" alt="Memory 6">
+                    <div class="caption">My birthday last year</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="memory-quote">
+            <blockquote>
+                "Friendship is born at that moment when one person says to another: 'What! You too? I thought I was the only one.'"
+                <footer>— C.S. Lewis</footer>
+            </blockquote>
+        </section>
+    </main>
+
+    <!-- Wishes Page - UPDATED AS REQUESTED -->
+    <main id="wishes" class="page">
+        <section class="wishes-intro">
+            <h1>From Ayush With Love</h1>
+            <p>My personal birthday wish for you</p>
+        </section>
+
+        <section class="wishes-container" style="max-width:800px; margin:0 auto;">
+            <div class="message-box">
+                <p>Dear [Friend's Name],</p>
+                <p>Here goes your complete personal birthday message...</p>
+                <p>This is my heartfelt wish just for you.</p>
+                <p>Love,<br>Ayush</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Surprise Page - UPDATED AS REQUESTED -->
+    <main id="surprise" class="page">
+        <section class="surprise-intro">
+            <h1>Your Musical Surprise</h1>
+            <p>Something special from Ayush</p>
+        </section>
+
+        <section class="surprise-container">
+            <div class="message-box" style="text-align:center;">
+                <h2><i class="fas fa-music"></i> A Special Dedication</h2>
+                <p>As a birthday gift, Ayush is dedicating a special song medley to you!</p>
+                <p>It's a musical surprise filled with all your favorite tunes.</p>
+                <p>This is my personal gift to celebrate our wonderful friendship.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Made with <i class="fas fa-heart"></i> for [Friend's Name]'s Birthday</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Loader
+            window.addEventListener('load', function() {
+                const loader = document.querySelector('.loader');
+                setTimeout(function() {
+                    loader.classList.add('hidden');
+                }, 1500);
+            });
+
+            // Page Navigation
+            const navLinks = document.querySelectorAll('nav a');
+            const pages = document.querySelectorAll('.page');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    
+                    // Update active nav link
+                    navLinks.forEach(navLink => navLink.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show selected page
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                        if (page.id === pageId) {
+                            page.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            // Music Player
+            const playMusicBtn = document.getElementById('playMusic');
+            const birthdaySong = document.getElementById('birthdaySong');
+            
+            if (playMusicBtn && birthdaySong) {
+                playMusicBtn.addEventListener('click', function() {
+                    if (birthdaySong.paused) {
+                        birthdaySong.play();
+                        playMusicBtn.textContent = 'Pause Music';
+                    } else {
+                        birthdaySong.pause();
+                        playMusicBtn.textContent = 'Play Birthday Song';
+                    }
+                });
+            }
+
+            // Countdown Timer
+            function updateCountdown() {
+                // Set the date we're counting down to (next birthday)
+                const now = new Date();
+                let nextBirthday = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1); // Example: countdown to tomorrow
+                
+                // If birthday already passed this year, set for next year
+                if (now > nextBirthday) {
+                    nextBirthday = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
+                }
+                
+                const distance = nextBirthday - now;
+                
+                // Time calculations
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                // Display results
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            // Update countdown every second
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+
+            // Surprise Lock
+            const lock = document.getElementById('lock');
+            if (lock) {
+                lock.addEventListener('click', function() {
+                    const surpriseContent = document.getElementById('surpriseContent');
+                    const lockIcon = this.querySelector('.lock-icon i');
+                    
+                    // Animate lock opening
+                    lockIcon.classList.remove('fa-lock');
+                    lockIcon.classList.add('fa-lock-open');
+                    
+                    // Show surprise content
+                    setTimeout(() => {
+                        surpriseContent.classList.remove('hidden');
+                        surpriseContent.style.animation = 'fadeIn 1s ease';
+                    }, 500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
